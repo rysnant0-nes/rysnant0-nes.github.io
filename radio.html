@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Auto Live Radio</title>
+</head>
+<body style="background:black;color:white;text-align:center;margin-top:40vh;">
+
+<h2>🔴 LIVE RADIO</h2>
+<p id="status">Connecting...</p>
+
+<audio id="radio" autoplay>
+  <source src="https://stream-node0.rri.co.id/streaming/14/9014/kbrn.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const radio = document.getElementById("radio");
+const statusText = document.getElementById("status");
+
+function startRadio() {
+    radio.play()
+    .then(() => {
+        statusText.innerText = "Streaming...";
+        console.log("Radio Started");
+    })
+    .catch(() => {
+        statusText.innerText = "Autoplay blocked, retrying...";
+        setTimeout(startRadio, 2000);
+    });
+}
+
+// Auto start ketika halaman load
+window.addEventListener("load", () => {
+    startRadio();
+});
+</script>
+
+</body>
+</html>
